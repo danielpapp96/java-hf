@@ -9,7 +9,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         InverseFizzBuzz fizzBuzz = new InverseFizzBuzz();
-        System.out.println(fizzBuzz.exec(sc.nextLine()));
+        String input = sc.nextLine();
+
+        if(input.length() > 13){
+            System.out.println("Input is invalid: length " + input.length());
+        }else {
+            System.out.println(fizzBuzz.exec(input));
+        }
+
     }
 
 
