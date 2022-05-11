@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class InverseFizzBuzz {
     public List<Integer> exec(String input) {
         String[] splittedIn = input.split(" ");
         List<Integer> nums = new ArrayList<>();
-
+        List<List<Integer>>results = new ArrayList<>();
 
         if (splittedIn.length == 1) {
             String a = splittedIn[0];
@@ -30,18 +31,25 @@ public class InverseFizzBuzz {
             }
         } else if (splittedIn.length == 2) {
             while (true) {
-                if(getSequence(splittedIn, nums)) break;
+                if(getSequence(splittedIn, results) || index == 101) break;
             }
 
         }
-        return nums;
+
+        return getTheMinList(results);
+    }
+
+    private static List<Integer> getTheMinList(List<List<Integer>> lists){
+        return lists.stream()
+                .min(Comparator.comparingInt(List::size))
+                .orElse(new ArrayList<>());
     }
 
 
-    public boolean getSequence(String[] splittedIn, List<Integer> nums) {
+    public boolean getSequence(String[] splittedIn,List<List<Integer>>results) {
         String a = splittedIn[0];
         String b = splittedIn[1];
-
+        List<Integer> nums = new ArrayList<>();
         //looking for the first number
         for (int i = this.index; i < 101; i++) {
             if (a.equals("Fizz")) {
@@ -71,11 +79,12 @@ public class InverseFizzBuzz {
                 if (isFizz(z)) {
                     nums.add(z);
                     this.index = z + 1;
-                    return true;
+                    results.add(nums);
+                    break;
                 } else {
                     if (isBuzz(z)) {
                         nums.clear();
-                        this.index = z;
+                        this.index += 1;
                         nums = new ArrayList<>();
                         break;
                     } else if (isFizzBuzz(z)) {
@@ -89,17 +98,18 @@ public class InverseFizzBuzz {
             } else if (b.equals("Buzz")) {
                 if (isBuzz(z)) {
                     nums.add(z);
-                    this.index += z + 1;
-                    return true;
+                    this.index += 1;
+                    results.add(nums);
+                    break;
                 } else {
                     if(isFizz(z)){
                         nums.clear();
-                        this.index = z;
+                        this.index += 1;
                         nums = new ArrayList<>();
                         break;
                     } else if(isFizzBuzz(z)){
                         nums.clear();
-                        this.index = z;
+                        this.index += 1;
                         nums = new ArrayList<>();
                         break;
                     } else {
@@ -109,17 +119,18 @@ public class InverseFizzBuzz {
             } else if (b.equals(("FizzBuzz"))) {
                 if (isFizzBuzz(z)) {
                     nums.add(z);
-                    index += z + 1;
-                    return true;
+                    this.index += 1;
+                    results.add(nums);
+                    break;
                 } else {
                     if(isFizz(z)){
                         nums.clear();
-                        this.index = z;
+                        this.index += 1;
                         nums = new ArrayList<>();
                         break;
                     } else if(isBuzz(z)){
                         nums.clear();
-                        this.index = z;
+                        this.index += 1;
                         nums = new ArrayList<>();
                         break;
                     } else {
@@ -127,6 +138,7 @@ public class InverseFizzBuzz {
                     }
                 }
             }
+        if(index == 100) return true;
         }
         return false;
     }
