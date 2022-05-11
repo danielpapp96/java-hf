@@ -11,7 +11,7 @@ public class Main {
         InverseFizzBuzz fizzBuzz = new InverseFizzBuzz();
         String input = sc.nextLine();
 
-        if(input.length() > 13){
+        if(input.length() > 17){
             System.out.println("Input is invalid: length " + input.length());
         }else {
             System.out.println(fizzBuzz.exec(input));

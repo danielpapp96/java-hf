@@ -35,8 +35,9 @@ public class InverseFizzBuzz {
                 }
             }
         } else if (splittedIn.length == 2) {
-            while (true) {
-                if(getSequence(splittedIn, results) || index == 101) break;
+            while (index < 100) {
+                if(getSequence(splittedIn, results)) break;
+
             }
 
         }
@@ -56,7 +57,7 @@ public class InverseFizzBuzz {
         String b = splittedIn[1];
         List<Integer> nums = new ArrayList<>();
         //looking for the first number
-        for (int i = this.index; i < 101; i++) {
+        for (int i = this.index; i < 100; i++) {
             if (a.equals("Fizz")) {
                 if (isFizz(i)) {
                     nums.add(i);
@@ -67,37 +68,38 @@ public class InverseFizzBuzz {
             } else if (a.equals("Buzz")) {
                 if (isBuzz(i)) {
                     nums.add(i);
-                    this.index += 1;
+                    this.index += i + 1;
                     break;
                 }
             } else if (a.equals(("FizzBuzz"))) {
                 if (isFizzBuzz(i)) {
                     nums.add(i);
-                    this.index += i + 1;
+                    this.index = i + 1 ;
                     break;
                 }
             }
         }
 
-        for (int z = this.index; z < 101; z++) {
+        for (int z = this.index; z < 100; z++) {
+            if(a.equals("FizzBuzz") && index > 93) return true;
+
             if (b.equals("Fizz")) {
                 if (isFizz(z)) {
                     nums.add(z);
-                    this.index = z + 1;
+                    this.index += 1;
                     results.add(nums);
                     break;
                 } else {
                     if (isBuzz(z)) {
                         nums.clear();
                         this.index += 1;
-                        nums = new ArrayList<>();
                         break;
                     } else if (isFizzBuzz(z)) {
-                        nums = new ArrayList<>();
-                        this.index = z;
+                        this.index += 1;
                         break;
                     } else {
                         nums.add(z);
+                        this.index += 1;
                     }
                 }
             } else if (b.equals("Buzz")) {
@@ -110,12 +112,10 @@ public class InverseFizzBuzz {
                     if(isFizz(z)){
                         nums.clear();
                         this.index += 1;
-                        nums = new ArrayList<>();
                         break;
                     } else if(isFizzBuzz(z)){
                         nums.clear();
                         this.index += 1;
-                        nums = new ArrayList<>();
                         break;
                     } else {
                         nums.add(z);
@@ -131,19 +131,16 @@ public class InverseFizzBuzz {
                     if(isFizz(z)){
                         nums.clear();
                         this.index += 1;
-                        nums = new ArrayList<>();
                         break;
                     } else if(isBuzz(z)){
                         nums.clear();
                         this.index += 1;
-                        nums = new ArrayList<>();
                         break;
                     } else {
                         nums.add(z);
                     }
                 }
             }
-        if(index == 100) return true;
         }
         return false;
     }
@@ -161,7 +158,7 @@ public class InverseFizzBuzz {
     }
 
     private boolean validateInput(String input) {
-        var options = new ArrayList<String>(Arrays.asList("Fizz", "Buzz", "Fizz Buzz", "FizzBuzz", "Fizz Fizz", "Fizz FizzBuzz"));
+        var options = new ArrayList<String>(Arrays.asList("Fizz", "Buzz", "Fizz Buzz", "FizzBuzz", "Fizz Fizz", "Fizz FizzBuzz", "Buzz Fizz", "FizzBuzz Fizz", "FizzBuzz Buzz","FizzBuzz FizzBuzz"));
         for(String str: options) {
             if(str.trim().contains(input))
                 return true;

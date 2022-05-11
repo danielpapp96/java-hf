@@ -56,6 +56,16 @@ public class InverFizzBuzzTest extends InverseFizzBuzz {
     }
 
     @Test
+    public void fizzbuzz_fizz_test(){
+        List<Integer> output = new ArrayList<>();
+        output.add(15);
+        output.add(16);
+        output.add(17);
+        output.add(18);
+        Assertions.assertEquals(output, this.exec("FizzBuzz Fizz"));
+    }
+
+    @Test
     public void invalidInput_test_two_word(){
         List<Integer> output = new ArrayList<>();
         Assertions.assertEquals(output, this.exec("asdf asdf"));
