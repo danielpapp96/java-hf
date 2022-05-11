@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,7 +9,12 @@ public class InverseFizzBuzz {
     public int index = 1;
 
     public List<Integer> exec(String input) {
+        if(!validateInput(input)) {
+            return Arrays.asList();
+        };
+
         String[] splittedIn = input.split(" ");
+
         List<Integer> nums = new ArrayList<>();
         List<List<Integer>>results = new ArrayList<>();
 
@@ -142,15 +148,24 @@ public class InverseFizzBuzz {
         return false;
     }
 
-    public boolean isFizz(int i) {
+    private boolean isFizz(int i) {
         return i % 3 == 0;
     }
 
-    public boolean isBuzz(int i) {
+    private boolean isBuzz(int i) {
         return i % 5 == 0;
     }
 
-    public boolean isFizzBuzz(int i) {
+    private boolean isFizzBuzz(int i) {
         return (i % 3 == 0) && (i % 5 == 0);
+    }
+
+    private boolean validateInput(String input) {
+        var options = new ArrayList<String>(Arrays.asList("Fizz", "Buzz", "Fizz Buzz", "FizzBuzz", "Fizz Fizz", "Fizz FizzBuzz"));
+        for(String str: options) {
+            if(str.trim().contains(input))
+                return true;
+        }
+        return false;
     }
 }
