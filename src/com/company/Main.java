@@ -14,10 +14,16 @@ public class Main {
         if(input.length() > 17){
             System.out.println("Input is invalid: length " + input.length());
         }else {
-            System.out.println(fizzBuzz.exec(input));
+            printResult(input, fizzBuzz.exec(input));
         }
 
     }
 
-
+    private static void printResult(String input, List<Integer> nums){
+        input += " -";
+        for(var n : nums){
+            input += " " + n;
+        }
+        System.out.println(input);
+    }
 }
